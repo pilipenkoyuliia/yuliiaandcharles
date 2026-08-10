@@ -135,8 +135,8 @@ export default function Block() {
             Let us know
           </p>
           <div style={{ ...jostRegular, color: "#f3f1ed" }} className="w-full">
-            <p className="m-0 leading-[1.5]">{"We'd love for you to be part of our celebration."}</p>
-            <p className="m-0 leading-[1.5]">Please reply by 20 August 2026</p>
+            <p className="m-0 leading-[1.5]">{"We'd love for you to join us for our celebration."}</p>
+            <p className="m-0 leading-[1.5]">Please reply by 25 August 2026</p>
           </div>
         </div>
 

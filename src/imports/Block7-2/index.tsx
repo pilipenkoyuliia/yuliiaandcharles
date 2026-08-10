@@ -1,6 +1,9 @@
 import { useState } from "react";
 import imgBlock7 from "@/imports/Img_let_us_know.png";
 
+const GOOGLE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbzCo8UJmasCuElB4D_xyLlgPXHt45p54zUbQqXn3_JtCT-G4sysiwaJSqyEG_Hywm2A/exec";
+
 const labelStyle: React.CSSProperties = {
   fontFamily: "'Avenir', 'Inter', sans-serif",
   fontStyle: "oblique",
@@ -57,10 +60,44 @@ export default function Block() {
   const [transport, setTransport] = useState<"yes" | "no" | null>(null);
   const [dietary, setDietary] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+
+    if (!name.trim() || !attending || !transport) {
+      setSubmitError("Please complete all required fields.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    const body = new URLSearchParams({
+      fullName: name.trim(),
+      attendance:
+        attending === "yes"
+          ? "Absolutely, wouldn't miss it!"
+          : "Regretfully declines",
+      transportation: transport === "yes" ? "Yes" : "No",
+      dietaryRestrictions: dietary.trim(),
+    });
+
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body,
+      });
+
+      setSubmitted(true);
+    } catch (error) {
+      console.error("RSVP submission failed:", error);
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -178,7 +215,8 @@ export default function Block() {
               <div className="flex flex-col gap-[12px] items-center">
                 <button
                   type="submit"
-                  className="rounded-[8px] w-full flex items-center justify-center p-[16px] hover:opacity-80 transition-opacity"
+                  disabled={isSubmitting}
+                  className="rounded-[8px] w-full flex items-center justify-center p-[16px] hover:opacity-80 transition-opacity disabled:opacity-60"
                   style={{
                     fontFamily: "'Avenir', 'Inter', sans-serif",
                     fontWeight: 400,
@@ -188,12 +226,21 @@ export default function Block() {
                     backgroundColor: "#a8a29e",
                     color: "#ffffff",
                     border: "none",
-                    cursor: "pointer",
+                    cursor: isSubmitting ? "wait" : "pointer",
                     whiteSpace: "nowrap",
                   }}
                 >
-                  SUBMIT
+                  {isSubmitting ? "SENDING..." : "SUBMIT"}
                 </button>
+                {submitError && (
+                  <p
+                    role="alert"
+                    className="m-0 text-center"
+                    style={{ ...jostRegular, fontSize: "12px", color: "#9b2c2c" }}
+                  >
+                    {submitError}
+                  </p>
+                )}
                 <p className="m-0 text-center" style={{ ...jostRegular, fontSize: "11px", color: "#888" }}>
                   {"Your personal information won't be shared."}
                 </p>

@@ -62,7 +62,7 @@ export default function Block() {
               fontSize: "16px",
             }}
           >
-            The greatest gift we could ever receive is having our favorite people beside us as we begin this new chapter together. Your love, support, and presence mean more to us than words can say.
+            The greatest gift we could receive is celebrating this special day with the people we love. Your presence, love, and support mean more to us than words can say.
           </p>
           <p
             className="m-0 leading-[23px] tracking-[1px]"
@@ -72,13 +72,16 @@ export default function Block() {
               fontSize: "16px",
             }}
           >
-            If you wish to honor us with something more, you can use the link to our shared fund.
+            If you would like to honor us with a gift, we have created a wedding fund. You can find the details below.
           </p>
         </div>
 
-        {/* SEE OUR FUND button */}
+        {/* Wedding fund details button */}
         <a
-          href="#"
+          href="https://drive.google.com/file/d/17ZxASHnGJT4jKyXytYKtTGKIPkVRftCp/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View our wedding fund details"
           className="bg-[#f3f1ed] flex flex-col items-center justify-center p-[16px] rounded-[8px] w-full no-underline hover:opacity-80 transition-opacity"
         >
           <span
@@ -92,7 +95,7 @@ export default function Block() {
               whiteSpace: "nowrap",
             }}
           >
-            SEE OUR FUND
+            VIEW FUND DETAILS
           </span>
         </a>
 

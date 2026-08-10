@@ -1,27 +1,27 @@
 const faqs = [
   {
     q: "Can I bring a plus-one?",
-    a: "If we miss someone you want to come with please contact with us as we have limited seating.",
+    a: "Due to limited seating, we can only accommodate the guests named on your invitation. If you would like to bring someone who is not listed, please contact us, and we’ll let you know if space allows.",
   },
   {
     q: "How do I RSVP?",
-    a: "Click the 'let us know' menu option on the home page to access the form. Please confirm by 20.09.2026 so we can finalize all the details.",
+    a: "Select “Let Us Know” from the menu to access the RSVP form. Please reply by 25 August 2026 so we can finalize all the details.",
   },
   {
-    q: "Are the ceremony and reception at the same place?",
-    a: "No. The ceremony will take place at Vaucresson City Hall, and the wedding dinner will be held at Château de Prunay, which is about 15 minutes away by car. For guests joining us at the ceremony, we will provide transportation from Vaucresson City Hall to the château.",
+    q: "Are the ceremony and reception at the same location?",
+    a: "No. The ceremony will take place at Vaucresson Town Hall, and the wedding dinner will be held at Château de Prunay, approximately 15 minutes away by car. Transportation from the Town Hall to the château will be provided for guests attending the ceremony.",
   },
   {
     q: "Are children invited?",
-    a: "We adore your little ones, please contact us to give us more details.",
+    a: "We adore your little ones! As space is limited, please contact us with the details, and we’ll let you know what arrangements can be made.",
   },
   {
     q: "Can I take photos during the ceremony?",
-    a: "Absolutely — just please be mindful of our photographers so they can capture every moment without interruption.",
+    a: "Absolutely! We simply ask that you remain mindful of our photographers so they can capture every special moment without interruption.",
   },
   {
-    q: "Is there parking at the venue?",
-    a: "Yes, parking is available both near the city hall and near the Château.",
+    q: "Is parking available?",
+    a: "Yes. Parking is available near both Vaucresson Town Hall and Château de Prunay.",
   },
 ];
 
@@ -61,7 +61,7 @@ export default function Block() {
             Good to know
           </p>
 
-          {/* few answers — Ephesis Regular 44px */}
+          {/* a few answers — Ephesis Regular 44px */}
           <p
             className="m-0"
             style={{
@@ -72,7 +72,7 @@ export default function Block() {
               color: "#303030",
             }}
           >
-            few answers
+            a few answers
           </p>
         </div>
 

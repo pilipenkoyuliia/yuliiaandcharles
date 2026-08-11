@@ -9,6 +9,7 @@ import Block6 from "@/imports/Block6-2/index";
 import Block7 from "@/imports/Block7-1/index";
 import Block72 from "@/imports/Block7-2/index";
 import Block8 from "@/imports/Block8-1/index";
+import { LanguageSwitcher, useI18n } from "./i18n";
 
 const WEDDING_DATE = new Date("2026-10-09T16:30:00");
 
@@ -109,6 +110,7 @@ function useScrollNav() {
 }
 
 export default function LandingPage() {
+  const { copy } = useI18n();
   const { days, hours, minutes, seconds } = useCountdown(WEDDING_DATE);
   const [entered, setEntered] = useState(false);
   const navVisible = useScrollNav();
@@ -171,26 +173,33 @@ export default function LandingPage() {
           transition: "transform 0.35s cubic-bezier(0.4,0,0.2,1)",
         }}
       >
+        <div
+          className="absolute"
+          style={{ top: "max(env(safe-area-inset-top), 12px)", right: "16px" }}
+        >
+          <LanguageSwitcher />
+        </div>
+
         {/* Desktop: all links + logo */}
         <div className="hidden sm:flex items-center gap-10 md:gap-12">
-          <a href="#our-story" className="text-white hover:opacity-60 transition-opacity" style={navStyle}>Story</a>
-          <a href="#details" className="text-white hover:opacity-60 transition-opacity" style={navStyle}>Details</a>
+          <a href="#our-story" className="text-white hover:opacity-60 transition-opacity" style={navStyle}>{copy.nav.story}</a>
+          <a href="#details" className="text-white hover:opacity-60 transition-opacity" style={navStyle}>{copy.nav.details}</a>
           <div style={{ width: 44 }}>
             <LogoMonogram white />
           </div>
-          <a href="#rsvp" className="text-white hover:opacity-60 transition-opacity" style={navStyle}>Let Us Know</a>
-          <a href="#faq" className="text-white hover:opacity-60 transition-opacity" style={navStyle}>FAQ</a>
+          <a href="#rsvp" className="text-white hover:opacity-60 transition-opacity" style={navStyle}>{copy.nav.rsvp}</a>
+          <a href="#faq" className="text-white hover:opacity-60 transition-opacity" style={navStyle}>{copy.nav.faq}</a>
         </div>
 
         {/* Mobile: single row — links | logo | links, shifted 44px down */}
         <div className="flex sm:hidden items-center justify-center gap-4 mt-11">
-          <a href="#our-story" className="text-white hover:opacity-60 transition-opacity" style={{ ...navStyle, fontSize: "9px", letterSpacing: "0.16em" }}>Story</a>
-          <a href="#details" className="text-white hover:opacity-60 transition-opacity" style={{ ...navStyle, fontSize: "9px", letterSpacing: "0.16em" }}>Details</a>
+          <a href="#our-story" className="text-white hover:opacity-60 transition-opacity" style={{ ...navStyle, fontSize: "9px", letterSpacing: "0.16em" }}>{copy.nav.story}</a>
+          <a href="#details" className="text-white hover:opacity-60 transition-opacity" style={{ ...navStyle, fontSize: "9px", letterSpacing: "0.16em" }}>{copy.nav.details}</a>
           <div style={{ width: 30, flexShrink: 0 }}>
             <LogoMonogram white />
           </div>
-          <a href="#rsvp" className="text-white hover:opacity-60 transition-opacity" style={{ ...navStyle, fontSize: "9px", letterSpacing: "0.16em" }}>Let Us Know</a>
-          <a href="#faq" className="text-white hover:opacity-60 transition-opacity" style={{ ...navStyle, fontSize: "9px", letterSpacing: "0.16em" }}>FAQ</a>
+          <a href="#rsvp" className="text-white hover:opacity-60 transition-opacity" style={{ ...navStyle, fontSize: "9px", letterSpacing: "0.16em" }}>{copy.nav.rsvp}</a>
+          <a href="#faq" className="text-white hover:opacity-60 transition-opacity" style={{ ...navStyle, fontSize: "9px", letterSpacing: "0.16em" }}>{copy.nav.faq}</a>
         </div>
       </nav>
 
@@ -246,7 +255,7 @@ export default function LandingPage() {
               marginBottom: 0,
             }}
           >
-            09 October 2026
+            {copy.hero.date}
           </p>
 
           {/* Location — Ephesis 32px — at 78.7% → gap from date */}
@@ -261,7 +270,7 @@ export default function LandingPage() {
               lineHeight: 1,
             }}
           >
-            Vaucresson, France
+            {copy.hero.location}
           </p>
         </div>
       </section>
@@ -285,7 +294,7 @@ export default function LandingPage() {
                   marginBottom: "12px",
                 }}
               >
-                THIS IS WHERE
+                {copy.forever.eyebrow}
               </p>
 
               <h2
@@ -300,7 +309,7 @@ export default function LandingPage() {
                   margin: 0,
                 }}
               >
-                OUR FOREVER
+                {copy.forever.title}
               </h2>
 
               <p
@@ -313,7 +322,7 @@ export default function LandingPage() {
                   marginBottom: "clamp(20px, 3vw, 36px)",
                 }}
               >
-                begins
+                {copy.forever.script}
               </p>
 
               <div
@@ -330,9 +339,7 @@ export default function LandingPage() {
                   maxWidth: "360px",
                 }}
               >
-                <p>With hearts full of gratitude, we invite you to join us as we exchange our vows and begin this new chapter.</p>
-                <p>This day is not only a celebration of our love, but of the family and friendships that have shaped us and brought us here.</p>
-                <p>To have you with us would mean more than words can say.</p>
+                {copy.forever.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </div>
 
               <p
@@ -373,17 +380,17 @@ export default function LandingPage() {
         <FadeSection>
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-white mb-8" style={{ ...capsStyle, opacity: 0.5 }}>
-              Our Next Chapter Begins In
+              {copy.countdown.title}
             </p>
             <div className="flex items-baseline justify-center gap-1 sm:gap-2">
               {[
-                { value: pad(days), label: "DAYS" },
+                { value: pad(days), label: copy.countdown.days },
                 { value: ":", label: "" },
-                { value: pad(hours), label: "HOURS" },
+                { value: pad(hours), label: copy.countdown.hours },
                 { value: ":", label: "" },
-                { value: pad(minutes), label: "MINUTES" },
+                { value: pad(minutes), label: copy.countdown.minutes },
                 { value: ":", label: "" },
-                { value: pad(seconds), label: "SECONDS" },
+                { value: pad(seconds), label: copy.countdown.seconds },
               ].map(({ value, label }, i) => {
                 if (value === ":") {
                   return (
@@ -449,7 +456,7 @@ export default function LandingPage() {
                   marginBottom: "12px",
                 }}
               >
-                THIS IS WHERE
+                {copy.story.eyebrow}
               </p>
 
               <h2
@@ -464,7 +471,7 @@ export default function LandingPage() {
                   margin: 0,
                 }}
               >
-                OUR STORY
+                {copy.story.title}
               </h2>
 
               <p
@@ -477,7 +484,7 @@ export default function LandingPage() {
                   marginBottom: "clamp(20px, 3vw, 36px)",
                 }}
               >
-                continue
+                {copy.story.script}
               </p>
 
               <div
@@ -494,9 +501,7 @@ export default function LandingPage() {
                   maxWidth: "380px",
                 }}
               >
-                <p>Our story began quietly - with easy conversations, even when we were speaking in languages that were not our own, and with the comforting feeling of finding home in another person.</p>
-                <p>Over time, we built a life filled with small moments of understanding, support, laughter, and care. Through every season of life - the challenging ones and the beautifully simple ones - we kept choosing each other, again and again.</p>
-                <p>What we love most about our story is how natural it feels to simply be together. Wherever we are, life feels a little brighter when we are side by side.</p>
+                {copy.story.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </div>
 
               <p
@@ -524,7 +529,7 @@ export default function LandingPage() {
         {/* Background — pre-darkened photo, no overlay needed */}
         <img
           src={venueImg}
-          alt="Wedding venue"
+          alt={copy.details.venueAlt}
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
         />
 
@@ -536,13 +541,13 @@ export default function LandingPage() {
             <div className="flex flex-col items-center text-center w-full" style={{ gap: "clamp(18px, 2.4vw, 34px)", marginBottom: "clamp(40px, 6vw, 86px)" }}>
               {/* DATE and VENUE — Cormorant Garamond Regular 44px tracking 2px */}
               <div className="flex items-start justify-center" style={{ gap: "clamp(12px, 1.8vw, 26px)" }}>
-                <span className="text-white uppercase" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 600, fontSize: "44px", letterSpacing: "2px", lineHeight: "44px" }}>DATE</span>
-                <span className="text-white" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, fontSize: "clamp(13px, 1.74vw, 25px)", lineHeight: "46px" }}>and</span>
-                <span className="text-white uppercase" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 600, fontSize: "44px", letterSpacing: "2px", lineHeight: "44px" }}>VENUE</span>
+                <span className="text-white uppercase" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 600, fontSize: "clamp(32px, 4vw, 44px)", letterSpacing: "2px", lineHeight: "44px" }}>{copy.details.date}</span>
+                <span className="text-white" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400, fontSize: "clamp(13px, 1.74vw, 25px)", lineHeight: "46px" }}>{copy.details.and}</span>
+                <span className="text-white uppercase" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 600, fontSize: "clamp(32px, 4vw, 44px)", letterSpacing: "2px", lineHeight: "44px" }}>{copy.details.venue}</span>
               </div>
               {/* Date — Avenir Heavy 14px tracking 2px */}
               <p className="text-white" style={{ fontFamily: "'Avenir', 'Inter', sans-serif", fontWeight: 700, fontSize: "clamp(10px, 0.97vw, 14px)", letterSpacing: "0.143em", textTransform: "uppercase" }}>
-                Friday, 09 October 2026
+                {copy.details.dateLine}
               </p>
             </div>
 
@@ -552,34 +557,36 @@ export default function LandingPage() {
               {/* WEDDING CEREMONY */}
               <div className="flex flex-col" style={{ gap: "clamp(32px, 4.44vw, 64px)", minWidth: "clamp(130px, 13.2vw, 190px)" }}>
                 <div className="flex flex-col" style={{ gap: "clamp(10px, 1.25vw, 18px)" }}>
-                  <p className="text-white uppercase" style={{ fontFamily: "'Avenir', 'Inter', sans-serif", fontWeight: 700, fontSize: "clamp(10px, 0.97vw, 14px)", letterSpacing: "0.143em" }}>Wedding ceremony</p>
+                  <p className="text-white uppercase" style={{ fontFamily: "'Avenir', 'Inter', sans-serif", fontWeight: 700, fontSize: "clamp(10px, 0.97vw, 14px)", letterSpacing: "0.143em" }}>{copy.details.ceremony}</p>
                   <p className="text-white uppercase" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "clamp(10px, 0.94vw, 13.5px)", letterSpacing: "0.182em" }}>16:30</p>
                   <div className="text-white uppercase" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "clamp(10px, 0.9vw, 13px)", letterSpacing: "0.189em", lineHeight: "16px" }}>
-                    <p>Vaucresson</p><p>City Hall</p>
+                    {copy.details.townHall.map((line) => <p key={line}>{line}</p>)}
                   </div>
                 </div>
                 {/* Address — Avenir Oblique */}
-                <a href="https://www.google.com/maps/place/8+Grande+Rue,+92420+Vaucresson/@48.83939,2.1553977,17z/data=!3m1!4b1!4m6!3m5!1s0x47e67ce9f8cd09f1:0x5c74dcb53bf5f918!8m2!3d48.83939!4d2.1579726!16s%2Fg%2F11bw3ww6td?entry=ttu&g_ep=EgoyMDI2MDgwNS4xIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noreferrer" className="hover:opacity-70 transition-opacity">
+                <a href="https://www.google.com/maps/place/8+Grande+Rue,+92420+Vaucresson/" target="_blank" rel="noopener noreferrer" className="inline-flex flex-col items-start text-white hover:opacity-70 transition-opacity">
                   <div className="text-white" style={{ fontFamily: "'Avenir', 'Inter', sans-serif", fontStyle: "oblique", fontSize: "clamp(12px, 0.97vw, 14px)", letterSpacing: "-0.0125em", lineHeight: "25px" }}>
-                    <p>8 Grande Rue,</p><p>92420</p><p>Vaucresson, France</p>
+                    {copy.details.vaucressonAddress.map((line) => <p key={line}>{line}</p>)}
                   </div>
+                  <span className="uppercase underline underline-offset-4" style={{ marginTop: "12px", fontFamily: "'Avenir', 'Inter', sans-serif", fontStyle: "normal", fontWeight: 700, fontSize: "9px", letterSpacing: "0.12em" }}>{copy.details.viewMap}</span>
                 </a>
               </div>
 
               {/* WEDDING DINNER */}
               <div className="flex flex-col" style={{ gap: "clamp(32px, 4.44vw, 64px)", minWidth: "clamp(120px, 11.8vw, 170px)" }}>
                 <div className="flex flex-col" style={{ gap: "clamp(10px, 1.18vw, 17px)" }}>
-                  <p className="text-white uppercase" style={{ fontFamily: "'Avenir', 'Inter', sans-serif", fontWeight: 700, fontSize: "clamp(10px, 0.97vw, 14px)", letterSpacing: "0.143em" }}>Wedding Dinner</p>
+                  <p className="text-white uppercase" style={{ fontFamily: "'Avenir', 'Inter', sans-serif", fontWeight: 700, fontSize: "clamp(10px, 0.97vw, 14px)", letterSpacing: "0.143em" }}>{copy.details.dinner}</p>
                   <p className="text-white uppercase" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "clamp(10px, 0.94vw, 13.5px)", letterSpacing: "0.182em" }}>17:30-01:00</p>
                   <div className="text-white uppercase" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "clamp(10px, 0.91vw, 13.1px)", letterSpacing: "0.189em", lineHeight: "16px" }}>
-                    <p>Château</p><p>De Prunay</p>
+                    {copy.details.chateau.map((line) => <p key={line}>{line}</p>)}
                   </div>
                 </div>
                 {/* Address — Inter Italic */}
-                <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x47e663d02450d0bf:0xcb715b9696c4a187?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noreferrer" className="hover:opacity-70 transition-opacity">
+                <a href="https://www.google.com/maps/search/?api=1&query=Château+de+Prunay+19+Chemin+de+Prunay+78430+Louveciennes" target="_blank" rel="noopener noreferrer" className="inline-flex flex-col items-start text-white hover:opacity-70 transition-opacity">
                   <div className="text-white italic" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "clamp(12px, 1.01vw, 14.6px)", letterSpacing: "-0.012em", lineHeight: "25px" }}>
-                    <p>19 Chem. de Prunay</p><p>78430</p><p>Louveciennes, France</p>
+                    {copy.details.chateauAddress.map((line) => <p key={line}>{line}</p>)}
                   </div>
+                  <span className="uppercase underline underline-offset-4" style={{ marginTop: "12px", fontFamily: "'Avenir', 'Inter', sans-serif", fontStyle: "normal", fontWeight: 700, fontSize: "9px", letterSpacing: "0.12em" }}>{copy.details.viewMap}</span>
                 </a>
               </div>
 

@@ -1,11 +1,14 @@
+import { useI18n } from "@/i18n";
+
 function TimelineHeading() {
+  const { copy } = useI18n();
   return (
     <div className="[word-break:break-word] content-stretch flex flex-col items-start leading-[0] relative shrink-0 text-[#303030] text-[44px] text-center w-full">
       <div className="flex flex-col font-['Cormorant_Garamond',serif] font-semibold justify-center relative shrink-0 tracking-[2px] uppercase w-full">
-        <p className="leading-[44px]">wedding</p>
+        <p className="leading-[44px]">{copy.timeline.title}</p>
       </div>
       <div className="flex flex-col font-['Ephesis',cursive] font-normal h-[44px] justify-center not-italic relative shrink-0 tracking-[0px] w-full">
-        <p className="leading-[128px]">timeline</p>
+        <p className="leading-[128px]">{copy.timeline.script}</p>
       </div>
     </div>
   );
@@ -30,15 +33,16 @@ function TimelineRow({ time, label }: { time: string; label: string }) {
 }
 
 function TimelineColumn() {
+  const { copy } = useI18n();
   const rows = [
-    { time: "16:30", label: "Ceremony" },
-    { time: "17:30", label: "Welcome" },
-    { time: "17:45", label: "Cocktails" },
-    { time: "18:00", label: "Photos" },
-    { time: "19:00", label: "Dinner" },
-    { time: "21:00", label: "Cake" },
-    { time: "22:00", label: "Party" },
-    { time: "01:00", label: "The end" },
+    { time: "16:30", label: copy.timeline.rows[0] },
+    { time: "17:30", label: copy.timeline.rows[1] },
+    { time: "17:45", label: copy.timeline.rows[2] },
+    { time: "18:00", label: copy.timeline.rows[3] },
+    { time: "19:00", label: copy.timeline.rows[4] },
+    { time: "21:00", label: copy.timeline.rows[5] },
+    { time: "22:00", label: copy.timeline.rows[6] },
+    { time: "01:00", label: copy.timeline.rows[7] },
   ];
   return (
     <div className="content-stretch flex flex-col items-center gap-[44px] w-full max-w-[345px] mx-auto">
@@ -53,41 +57,36 @@ function TimelineColumn() {
 }
 
 function DressHeading() {
+  const { copy } = useI18n();
   return (
     <div className="[word-break:break-word] content-stretch flex flex-col items-start leading-[0] relative shrink-0 text-[#303030] text-[44px] text-center w-full">
       <div className="flex flex-col font-['Cormorant_Garamond',serif] font-semibold justify-center relative shrink-0 tracking-[2px] uppercase w-full">
-        <p className="leading-[44px]">Dress</p>
+        <p className="leading-[44px]">{copy.dress.title}</p>
       </div>
       <div className="flex flex-col font-['Ephesis',cursive] font-normal h-[44px] justify-center not-italic relative shrink-0 tracking-[0px] w-full">
-        <p className="leading-[128px]">code</p>
+        <p className="leading-[128px]">{copy.dress.script}</p>
       </div>
     </div>
   );
 }
 
 function DressColumn() {
+  const { copy } = useI18n();
   return (
     <div className="content-stretch flex flex-col items-center gap-[44px] w-full max-w-[345px] mx-auto">
       <DressHeading />
       <div className="[word-break:break-word] content-stretch flex flex-col gap-[34px] items-start leading-[0] not-italic relative shrink-0 text-[#303030] text-[16px] text-center w-full">
         <div className="content-stretch flex flex-col font-['Avenir:Roman',sans-serif] gap-[24px] items-end relative shrink-0 tracking-[1px] w-full">
           <div className="flex flex-col justify-center relative shrink-0 w-full">
-            <p className="leading-[24px] mb-0">We would love for our wedding day to</p>
-            <p className="leading-[24px]">feel timeless, elegant, and romantic.</p>
+            <p className="leading-[24px]">{copy.dress.intro}</p>
           </div>
           <div className="flex flex-col justify-center relative shrink-0 w-full">
-            <p className="leading-[24px] mb-0">
-              Elegant black, light neutral, and soft pastel tones. Gentlemen are invited to wear black or light-colored suits.
-              <br aria-hidden />
-              Ladies are invited to wear black or light outfits in soft pastel shades.
-            </p>
-            <p className="leading-[24px]">We kindly ask you to avoid very bright or neon colors.</p>
+            <p className="leading-[24px] mb-4">{copy.dress.guidance}</p>
+            <p className="leading-[24px]">{copy.dress.avoid}</p>
           </div>
         </div>
         <div className="flex flex-col font-['Avenir:Oblique',sans-serif] justify-center relative shrink-0 w-full">
-          <p className="leading-[24px] mb-0">Most importantly, wear something that makes</p>
-          <p className="leading-[24px] mb-0">you feel beautiful, confident, and ready to</p>
-          <p className="leading-[24px]">{`celebrate with us. `}</p>
+          <p className="leading-[24px]">{copy.dress.closing}</p>
         </div>
       </div>
     </div>

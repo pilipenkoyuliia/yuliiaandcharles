@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import envelopeImg from "@/imports/Envelope-1.png";
+import { LanguageSwitcher, useI18n } from "./i18n";
 
 interface Props {
   onEnter: () => void;
 }
 
 export default function HeroEntry({ onEnter }: Props) {
+  const { copy } = useI18n();
   const [exiting, setExiting] = useState(false);
   const [pulse, setPulse] = useState(false);
 
@@ -26,13 +28,21 @@ export default function HeroEntry({ onEnter }: Props) {
       style={{ backgroundColor: "#f3f1ed" }}
       onClick={handleClick}
     >
+      <div
+        className="fixed z-20"
+        style={{ top: "max(env(safe-area-inset-top), 16px)", right: "16px" }}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <LanguageSwitcher dark />
+      </div>
+
       {/* Text block — top */}
       <div className="flex flex-col items-center gap-0 mb-6 sm:mb-8 z-10">
         <p
           className="animate-fade-up delay-200 text-[#2c333c] tracking-[0.18em] text-xs sm:text-sm mb-4 sm:mb-6"
           style={{ fontFamily: "'Avenir', 'Inter', sans-serif", fontWeight: 700, letterSpacing: "0.18em" }}
         >
-          YOU HAVE AN INVITATION
+          {copy.entry.invitation}
         </p>
         <p
           className="animate-fade-up delay-400"
@@ -45,7 +55,7 @@ export default function HeroEntry({ onEnter }: Props) {
             marginBottom: "4px",
           }}
         >
-          from
+          {copy.entry.from}
         </p>
         <p
           className="animate-fade-up delay-600 text-black"
@@ -65,7 +75,7 @@ export default function HeroEntry({ onEnter }: Props) {
       <div className="animate-scale-in delay-300 relative w-[min(88vw,480px)] sm:w-[min(70vw,520px)]">
         <img
           src={envelopeImg}
-          alt="Wedding invitation envelope"
+          alt={copy.entry.envelopeAlt}
           className="w-full h-auto object-contain"
           style={{ filter: "drop-shadow(0 8px 32px rgba(0,0,0,0.10))" }}
         />
@@ -77,7 +87,7 @@ export default function HeroEntry({ onEnter }: Props) {
         className={`animate-fade-up delay-1200 mt-8 sm:mt-10 text-[10px] sm:text-xs tracking-[0.2em] text-[#2c333c] transition-opacity duration-700 ${pulse ? "opacity-60" : "opacity-0"}`}
         style={{ fontFamily: "'Avenir', 'Inter', sans-serif" }}
       >
-        CLICK TO OPEN
+        {copy.entry.open}
       </p>
     </div>
   );

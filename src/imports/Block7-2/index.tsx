@@ -1,5 +1,6 @@
 import { useState } from "react";
 import imgBlock7 from "@/imports/Img_let_us_know.png";
+import { useI18n } from "@/i18n";
 
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzCo8UJmasCuElB4D_xyLlgPXHt45p54zUbQqXn3_JtCT-G4sysiwaJSqyEG_Hywm2A/exec";
@@ -55,24 +56,25 @@ function RadioOption({
 }
 
 export default function Block() {
+  const { copy, language } = useI18n();
   const [name, setName] = useState("");
   const [attending, setAttending] = useState<"yes" | "no" | null>(null);
   const [transport, setTransport] = useState<"yes" | "no" | null>(null);
   const [dietary, setDietary] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState("");
+  const [submitError, setSubmitError] = useState<"required" | "failed" | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!name.trim() || !attending || !transport) {
-      setSubmitError("Please complete all required fields.");
+      setSubmitError("required");
       return;
     }
 
     setIsSubmitting(true);
-    setSubmitError("");
+    setSubmitError(null);
 
     const body = new URLSearchParams({
       fullName: name.trim(),
@@ -82,6 +84,7 @@ export default function Block() {
           : "Regretfully declines",
       transportation: transport === "yes" ? "Yes" : "No",
       dietaryRestrictions: dietary.trim(),
+      language,
     });
 
     try {
@@ -94,7 +97,7 @@ export default function Block() {
       setSubmitted(true);
     } catch (error) {
       console.error("RSVP submission failed:", error);
-      setSubmitError("Something went wrong. Please try again.");
+      setSubmitError("failed");
     } finally {
       setIsSubmitting(false);
     }
@@ -132,11 +135,11 @@ export default function Block() {
               color: "#ffffff",
             }}
           >
-            Let us know
+            {copy.rsvp.title}
           </p>
           <div style={{ ...jostRegular, color: "#f3f1ed" }} className="w-full">
-            <p className="m-0 leading-[1.5]">{"We'd love for you to join us for our celebration."}</p>
-            <p className="m-0 leading-[1.5]">Please reply by 25 August 2026</p>
+            <p className="m-0 leading-[1.5]">{copy.rsvp.intro}</p>
+            <p className="m-0 leading-[1.5]">{copy.rsvp.deadline}</p>
           </div>
         </div>
 
@@ -145,10 +148,10 @@ export default function Block() {
           {submitted ? (
             <div className="flex flex-col items-center gap-4 py-8 text-center">
               <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 600, fontSize: "24px", color: "#303030" }}>
-                Thank you!
+                {copy.rsvp.thanks}
               </p>
               <p style={{ ...jostRegular, color: "#888" }}>
-                {"We've received your RSVP and can't wait to celebrate with you."}
+                {copy.rsvp.received}
               </p>
             </div>
           ) : (
@@ -156,7 +159,7 @@ export default function Block() {
 
               {/* Name */}
               <div className="flex flex-col gap-[8px]">
-                <label style={labelStyle}>Your full name or the names of the couple*</label>
+                <label style={labelStyle}>{copy.rsvp.name}</label>
                 <input
                   required
                   value={name}
@@ -172,15 +175,15 @@ export default function Block() {
 
               {/* Attending */}
               <div className="flex flex-col gap-[8px]">
-                <p className="m-0" style={labelStyle}>Will you be attending our wedding celebration?*</p>
+                <p className="m-0" style={labelStyle}>{copy.rsvp.attendance}</p>
                 <div className="flex flex-col gap-[8px]">
                   <RadioOption
-                    label="Absolutely, wouldn't miss it!"
+                    label={copy.rsvp.attendingYes}
                     selected={attending === "yes"}
                     onClick={() => setAttending("yes")}
                   />
                   <RadioOption
-                    label="Regretfully declines"
+                    label={copy.rsvp.attendingNo}
                     selected={attending === "no"}
                     onClick={() => setAttending("no")}
                   />
@@ -189,16 +192,16 @@ export default function Block() {
 
               {/* Transport */}
               <div className="flex flex-col gap-[8px]">
-                <p className="m-0" style={labelStyle}>Will you need the transportation from ceremony to chateau?*</p>
+                <p className="m-0" style={labelStyle}>{copy.rsvp.transport}</p>
                 <div className="flex flex-col gap-[8px]">
-                  <RadioOption label="Yes" selected={transport === "yes"} onClick={() => setTransport("yes")} />
-                  <RadioOption label="No" selected={transport === "no"} onClick={() => setTransport("no")} />
+                  <RadioOption label={copy.rsvp.yes} selected={transport === "yes"} onClick={() => setTransport("yes")} />
+                  <RadioOption label={copy.rsvp.no} selected={transport === "no"} onClick={() => setTransport("no")} />
                 </div>
               </div>
 
               {/* Dietary */}
               <div className="flex flex-col gap-[8px]">
-                <label style={labelStyle}>Your comfort matters to us. If you have any food allergies or dietary restrictions, please share them below.</label>
+                <label style={labelStyle}>{copy.rsvp.dietary}</label>
                 <input
                   value={dietary}
                   onChange={e => setDietary(e.target.value)}
@@ -230,7 +233,7 @@ export default function Block() {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  {isSubmitting ? "SENDING..." : "SUBMIT"}
+                  {isSubmitting ? copy.rsvp.sending : copy.rsvp.submit}
                 </button>
                 {submitError && (
                   <p
@@ -238,11 +241,11 @@ export default function Block() {
                     className="m-0 text-center"
                     style={{ ...jostRegular, fontSize: "12px", color: "#9b2c2c" }}
                   >
-                    {submitError}
+                    {copy.rsvp[submitError]}
                   </p>
                 )}
                 <p className="m-0 text-center" style={{ ...jostRegular, fontSize: "11px", color: "#888" }}>
-                  {"Your personal information won't be shared."}
+                  {copy.rsvp.privacy}
                 </p>
               </div>
 

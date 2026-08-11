@@ -1,6 +1,8 @@
 import imgBlock7 from "./3febf04895df3dcc90207dd7b0fed1da8f765bb5.png";
+import { useI18n } from "@/i18n";
 
 export default function Block() {
+  const { copy } = useI18n();
   return (
     <section
       className="relative w-full flex items-center justify-center"
@@ -34,7 +36,7 @@ export default function Block() {
               color: "#f3f1ed",
             }}
           >
-            Gifts
+            {copy.gifts.title}
           </p>
           {/* fund — Ephesis Regular 44px tracking 2% */}
           <p
@@ -48,7 +50,7 @@ export default function Block() {
               color: "#f3f1ed",
             }}
           >
-            fund
+            {copy.gifts.script}
           </p>
         </div>
 
@@ -62,7 +64,7 @@ export default function Block() {
               fontSize: "16px",
             }}
           >
-            The greatest gift we could receive is celebrating this special day with the people we love. Your presence, love, and support mean more to us than words can say.
+            {copy.gifts.first}
           </p>
           <p
             className="m-0 leading-[23px] tracking-[1px]"
@@ -72,7 +74,7 @@ export default function Block() {
               fontSize: "16px",
             }}
           >
-            If you would like to honor us with a gift, we have created a wedding fund. You can find the details below.
+            {copy.gifts.second}
           </p>
         </div>
 
@@ -81,7 +83,7 @@ export default function Block() {
           href="https://drive.google.com/file/d/17ZxASHnGJT4jKyXytYKtTGKIPkVRftCp/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="View our wedding fund details"
+          aria-label={copy.gifts.buttonAria}
           className="bg-[#f3f1ed] flex flex-col items-center justify-center p-[16px] rounded-[8px] w-full no-underline hover:opacity-80 transition-opacity"
         >
           <span
@@ -95,7 +97,7 @@ export default function Block() {
               whiteSpace: "nowrap",
             }}
           >
-            VIEW FUND DETAILS
+            {copy.gifts.button}
           </span>
         </a>
 

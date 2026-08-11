@@ -1,8 +1,9 @@
 import { useState } from "react";
 import HeroEntry from "./HeroEntry";
 import LandingPage from "./LandingPage";
+import { LanguageProvider } from "./i18n";
 
-export default function App() {
+function WeddingSite() {
   const [page, setPage] = useState<"hero" | "landing">("hero");
   const [showLanding, setShowLanding] = useState(false);
 
@@ -23,3 +24,10 @@ export default function App() {
   );
 }
 
+export default function App() {
+  return (
+    <LanguageProvider>
+      <WeddingSite />
+    </LanguageProvider>
+  );
+}

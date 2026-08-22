@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import heroImg from "@/imports/Hero2/62320f1ca1aa970cd8e02404a8f3eb836673f4d9.png";
+import heroMobileImg from "@/imports/Hero2/hero-mobile.png";
 import foreverImg from "@/imports/Img_block1-1.png";
 import storyImg from "@/imports/Img_block3.png";
 import venueImg from "@/imports/Img_bg_block_4-1.png";
@@ -205,19 +206,22 @@ export default function LandingPage() {
 
       {/* ── HERO ── */}
       <section className="relative w-full" style={{ height: "100vh", minHeight: "560px" }}>
-        <img
-          src={heroImg}
-          alt="Yuliia and Charles"
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "57% 30%",
-            display: "block",
-          }}
-        />
+        <picture>
+  <source media="(max-width: 639px)" srcSet={heroMobileImg} />
+  <img
+    src={heroImg}
+    alt="Yuliia and Charles"
+    style={{
+      position: "absolute",
+      inset: 0,
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      objectPosition: "center 30%",
+      display: "block",
+    }}
+  />
+</picture>
 
         {/* Text block — vertically at 64.4% from top, matching Hero2 import positions */}
         <div

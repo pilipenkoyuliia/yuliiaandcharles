@@ -78,7 +78,7 @@ const translations = {
     rsvp: {
       title: "LET US KNOW",
       intro: "We’d love for you to join us for our celebration.",
-      deadline: "Please reply by 25 August 2026",
+      deadline: "Please reply by 30 August 2026",
       thanks: "Thank you!",
       received: "We’ve received your RSVP and can’t wait to celebrate with you.",
       name: "Your full name (or both names, if replying as a couple)*",
@@ -101,7 +101,7 @@ const translations = {
       script: "a few answers",
       items: [
         ["Can I bring a plus-one?", "Due to limited seating, we can only accommodate the guests named on your invitation. If you would like to bring someone who is not listed, please contact us, and we’ll let you know if space allows."],
-        ["How do I RSVP?", "Select “RSVP” from the menu to access the form. Please reply by 25 August 2026 so we can finalize all the details."],
+        ["How do I RSVP?", "Select “RSVP” from the menu to access the form. Please reply by 30 August 2026 so we can finalize all the details."],
         ["Are the ceremony and reception at the same location?", "No. The ceremony will take place at Vaucresson Town Hall, and the wedding dinner will be held at Château de Prunay, approximately 15 minutes away by car. Transportation from the Town Hall to the château will be provided for guests attending the ceremony."],
         ["Are children invited?", "We adore your little ones! As space is limited, please contact us with the details, and we’ll let you know what arrangements can be made."],
         ["Can I take photos during the ceremony?", "Absolutely! We simply ask that you remain mindful of our photographers so they can capture every special moment without interruption."],
@@ -184,7 +184,7 @@ const translations = {
     rsvp: {
       title: "RÉPONDEZ-NOUS",
       intro: "Nous serions très heureux de vous compter parmi nous.",
-      deadline: "Merci de répondre avant le 25 août 2026",
+      deadline: "Merci de répondre avant le 30 août 2026",
       thanks: "Merci !",
       received: "Nous avons bien reçu votre réponse et avons hâte de célébrer avec vous.",
       name: "Votre nom complet (ou vos deux noms si vous répondez en couple)*",
@@ -207,7 +207,7 @@ const translations = {
       script: "quelques réponses",
       items: [
         ["Puis-je venir accompagné(e) ?", "Le nombre de places étant limité, nous ne pouvons accueillir que les personnes nommées sur votre invitation. Si vous souhaitez venir avec une personne qui n’y figure pas, contactez-nous et nous vous dirons si cela est possible."],
-        ["Comment confirmer ma présence ?", "Sélectionnez « RSVP » dans le menu pour accéder au formulaire. Merci de répondre avant le 25 août 2026 afin que nous puissions finaliser tous les détails."],
+        ["Comment confirmer ma présence ?", "Sélectionnez « RSVP » dans le menu pour accéder au formulaire. Merci de répondre avant le 30 août 2026 afin que nous puissions finaliser tous les détails."],
         ["La cérémonie et la réception ont-elles lieu au même endroit ?", "Non. La cérémonie aura lieu à la mairie de Vaucresson et le dîner au Château de Prunay, à environ 15 minutes en voiture. Un transport entre la mairie et le château sera prévu pour les invités assistant à la cérémonie."],
         ["Les enfants sont-ils invités ?", "Nous adorons vos petits ! Le nombre de places étant limité, contactez-nous avec les détails et nous vous indiquerons ce qu’il est possible d’organiser."],
         ["Puis-je prendre des photos pendant la cérémonie ?", "Bien sûr ! Nous vous demandons simplement de veiller à ne pas gêner nos photographes afin qu’ils puissent immortaliser chaque moment important."],
@@ -290,7 +290,7 @@ const translations = {
     rsvp: {
       title: "ДАЙТЕ НАМ ЗНАТИ",
       intro: "Будемо дуже раді розділити це свято з вами.",
-      deadline: "Будь ласка, дайте відповідь до 25 серпня 2026 року",
+      deadline: "Будь ласка, дайте відповідь до 30 серпня 2026 року",
       thanks: "Дякуємо!",
       received: "Ми отримали вашу відповідь і з нетерпінням чекаємо на зустріч.",
       name: "Ваше повне ім’я (або обидва імені, якщо відповідаєте як пара)*",
@@ -313,7 +313,7 @@ const translations = {
       script: "кілька відповідей",
       items: [
         ["Чи можна прийти з партнером або партнеркою?", "Через обмежену кількість місць ми можемо запросити лише гостей, зазначених у вашому запрошенні. Якщо ви хотіли б прийти з людиною, якої немає у списку, зв’яжіться з нами — ми повідомимо, чи є така можливість."],
-        ["Як підтвердити участь?", "Оберіть «RSVP» у меню, щоб відкрити форму. Будь ласка, дайте відповідь до 25 серпня 2026 року, щоб ми могли остаточно узгодити всі деталі."],
+        ["Як підтвердити участь?", "Оберіть «RSVP» у меню, щоб відкрити форму. Будь ласка, дайте відповідь до 30 серпня 2026 року, щоб ми могли остаточно узгодити всі деталі."],
         ["Церемонія та святкова вечеря відбудуться в одному місці?", "Ні. Церемонія відбудеться в мерії Вокрессона, а весільна вечеря — у Château de Prunay, приблизно за 15 хвилин їзди. Для гостей, які будуть на церемонії, ми організуємо трансфер від мерії до шато."],
         ["Чи запрошені діти?", "Ми обожнюємо ваших малюків! Оскільки кількість місць обмежена, зв’яжіться з нами та повідомте деталі — ми скажемо, що можна організувати."],
         ["Чи можна фотографувати під час церемонії?", "Звичайно! Просимо лише не заважати нашим фотографам, щоб вони могли зафіксувати кожну важливу мить."],

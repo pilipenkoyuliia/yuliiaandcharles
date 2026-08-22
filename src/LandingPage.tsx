@@ -214,7 +214,7 @@ export default function LandingPage() {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "center 30%",
+            objectPosition: "57% 30%",
             display: "block",
           }}
         />
